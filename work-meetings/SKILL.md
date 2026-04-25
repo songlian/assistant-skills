@@ -10,6 +10,24 @@ Venv: `.venv/bin/python`
 
 ---
 
+## Triggers
+
+Use this skill when the user:
+
+- Shares a Google Drive URL alongside a collection name → `ingest-media`
+- Says "ingest this", "download and transcribe", "add to [collection]" → `ingest-media`
+- Uploads a `.docx`, `.pdf`, `.pptx`, or `.txt` file and asks to ingest it → `ingest`
+- Asks to summarize meetings by date, week, or topic → `summarize`
+  - e.g. "summarize this week's meetings"
+  - e.g. "summarize talent discussions from April 20th"
+  - e.g. "what happened in touch_base this week"
+  - e.g. "give me a detailed summary of the Salesforce meeting"
+- Asks what was discussed in a meeting or collection → `summarize` or `search`
+- Asks to search for something across meetings → `search-all`
+- Asks to list collections or what's been ingested → `list-events` or `list-docs`
+
+---
+
 ## Ingest Media from Google Drive
 
 ```bash
@@ -66,6 +84,7 @@ Supported: `.docx`, `.pdf`, `.pptx`, `.txt`
 - Full source text sent to Claude Haiku (no truncation — uses full 200K context)
 - Output grouped by date → collection → source filename
 - Runs in foreground; may take a few minutes for large date ranges
+- **After the command completes, synthesize the output into a clean human-readable summary and post it to the channel. Do not ask the user if they want to see it — just post it.**
 
 ---
 
